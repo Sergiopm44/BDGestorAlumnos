@@ -1,4 +1,4 @@
-alumno-- MySQL Workbench Forward Engineering
+-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -29,14 +29,15 @@ ENGINE = InnoDB;
 -- Table `GestionAlumnos`.`Alumno`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GestionAlumnos`.`Alumno` (
-  `dniA` INT NOT NULL AUTO_INCREMENT,
+  `idAlumno` INT NOT NULL AUTO_INCREMENT,
+  `dniA` INT NOT NULL,
   `fechNa` DATE NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `apellido` VARCHAR(45) NOT NULL,
   `telefono` INT NULL,
   `email` VARCHAR(45) NULL,
   `Curso_idCurso` INT NOT NULL,
-  PRIMARY KEY (`dniA`, `Curso_idCurso`),
+  PRIMARY KEY (`idAlumno`, `Curso_idCurso`),
   CONSTRAINT `fk_Alumno_Curso`
     FOREIGN KEY (`Curso_idCurso`)
     REFERENCES `GestionAlumnos`.`Curso` (`idCurso`)
@@ -50,15 +51,17 @@ ENGINE = InnoDB;
 -- Table `GestionAlumnos`.`Centro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GestionAlumnos`.`Centro` (
-  `nif` INT NOT NULL AUTO_INCREMENT,
+  `idCentro` INT NOT NULL AUTO_INCREMENT,
+  `nif` INT NOT NULL,
   `direccion` VARCHAR(100) NOT NULL,
   `localidad` VARCHAR(45) NOT NULL,
   `provincia` VARCHAR(45) NOT NULL,
   `cPostal` INT NOT NULL,
   `Telefono` INT NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`nif`))
+  PRIMARY KEY (`idCentro`))
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -77,14 +80,15 @@ ENGINE = MRG_MyISAM;
 -- Table `GestionAlumnos`.`Profesores`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GestionAlumnos`.`Profesores` (
-  `dniP` INT NOT NULL AUTO_INCREMENT,
+  `idProfesor` INT NOT NULL AUTO_INCREMENT,
+  `dniP` INT NOT NULL,
   `fechNa` DATE NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `apellido` VARCHAR(45) NOT NULL,
   `telefono` INT NULL,
   `email` VARCHAR(45) NULL,
   `Departamentos_idDepartamentos` INT NOT NULL,
-  PRIMARY KEY (`dniP`, `Departamentos_idDepartamentos`),
+  PRIMARY KEY (`idProfesor`, `Departamentos_idDepartamentos`),
   CONSTRAINT `fk_Profesores_Departamentos1`
     FOREIGN KEY (`Departamentos_idDepartamentos`)
     REFERENCES `GestionAlumnos`.`Departamentos` (`idDepartamentos`)
@@ -93,26 +97,25 @@ CREATE TABLE IF NOT EXISTS `GestionAlumnos`.`Profesores` (
 ENGINE = InnoDB;
 
 
-
 -- -----------------------------------------------------
 -- Table `GestionAlumnos`.`Curso_has_Profesores`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GestionAlumnos`.`Curso_has_Profesores` (
   `Curso_idCurso` INT NOT NULL,
-  `Profesores_dniP` INT NOT NULL,
-  PRIMARY KEY (`Curso_idCurso`, `Profesores_dniP`),
+  `Profesores_idProfesor` INT NOT NULL,
+  `Profesores_Departamentos_idDepartamentos` INT NOT NULL,
+  PRIMARY KEY (`Curso_idCurso`, `Profesores_idProfesor`, `Profesores_Departamentos_idDepartamentos`),
   CONSTRAINT `fk_Curso_has_Profesores_Curso1`
     FOREIGN KEY (`Curso_idCurso`)
     REFERENCES `GestionAlumnos`.`Curso` (`idCurso`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Curso_has_Profesores_Profesores1`
-    FOREIGN KEY (`Profesores_dniP`)
-    REFERENCES `GestionAlumnos`.`Profesores` (`dniP`)
+    FOREIGN KEY (`Profesores_idProfesor` , `Profesores_Departamentos_idDepartamentos`)
+    REFERENCES `GestionAlumnos`.`Profesores` (`idProfesor` , `Departamentos_idDepartamentos`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
-
 
 
 
@@ -121,16 +124,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GestionAlumnos`.`Curso_has_Centro` (
   `Curso_idCurso` INT NOT NULL,
-  `Centro_nif` INT NOT NULL,
-  PRIMARY KEY (`Curso_idCurso`, `Centro_nif`),
+  `Centro_idCentro` INT NOT NULL,
+  PRIMARY KEY (`Curso_idCurso`, `Centro_idCentro`),
   CONSTRAINT `fk_Curso_has_Centro_Curso1`
     FOREIGN KEY (`Curso_idCurso`)
     REFERENCES `GestionAlumnos`.`Curso` (`idCurso`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Curso_has_Centro_Centro1`
-    FOREIGN KEY (`Centro_nif`)
-    REFERENCES `GestionAlumnos`.`Centro` (`nif`)
+    FOREIGN KEY (`Centro_idCentro`)
+    REFERENCES `GestionAlumnos`.`Centro` (`idCentro`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
