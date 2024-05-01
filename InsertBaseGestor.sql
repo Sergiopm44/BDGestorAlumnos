@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `GestionAlumnos`.`Departamentos` (
   `descripcion` VARCHAR(150) NOT NULL,
   `numDepartamento` INT NOT NULL,
   PRIMARY KEY (`idDepartamentos`))
-ENGINE = MRG_MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
