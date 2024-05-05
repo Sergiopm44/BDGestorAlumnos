@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `gestionalumnos` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
+USE `gestionalumnos`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gestionalumnos
@@ -16,28 +18,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `curso`
+-- Table structure for table `curso_has_centro`
 --
 
-DROP TABLE IF EXISTS `curso`;
+DROP TABLE IF EXISTS `curso_has_centro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `curso` (
-  `idCurso` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) NOT NULL,
-  `descripcion` varchar(150) NOT NULL,
-  PRIMARY KEY (`idCurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `curso_has_centro` (
+  `Curso_idCurso` int(11) NOT NULL,
+  `Centro_idCentro` int(11) NOT NULL,
+  PRIMARY KEY (`Curso_idCurso`,`Centro_idCentro`),
+  KEY `fk_Curso_has_Centro1_Centro1_idx` (`Centro_idCentro`),
+  KEY `fk_Curso_has_Centro1_Curso1_idx` (`Curso_idCurso`),
+  CONSTRAINT `fk_Curso_has_Centro1_Centro1` FOREIGN KEY (`Centro_idCentro`) REFERENCES `centro` (`idCentro`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Curso_has_Centro1_Curso1` FOREIGN KEY (`Curso_idCurso`) REFERENCES `curso` (`idCurso`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `curso`
+-- Dumping data for table `curso_has_centro`
 --
 
-LOCK TABLES `curso` WRITE;
-/*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` VALUES (1,'Ciencias','Tortura');
-/*!40000 ALTER TABLE `curso` ENABLE KEYS */;
+LOCK TABLES `curso_has_centro` WRITE;
+/*!40000 ALTER TABLE `curso_has_centro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `curso_has_centro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 20:56:49
+-- Dump completed on 2024-05-05 17:32:36

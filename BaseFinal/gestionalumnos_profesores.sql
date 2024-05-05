@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `gestionalumnos` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
+USE `gestionalumnos`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gestionalumnos
@@ -34,10 +36,9 @@ CREATE TABLE `profesores` (
   `email` varchar(120) DEFAULT NULL,
   `Departamentos_idDepartamentos` int(11) NOT NULL,
   PRIMARY KEY (`idProfesor`,`Departamentos_idDepartamentos`),
-  UNIQUE KEY `dniP_UNIQUE` (`dniP`),
   KEY `fk_Profesores_Departamentos1_idx` (`Departamentos_idDepartamentos`),
   CONSTRAINT `fk_Profesores_Departamentos1` FOREIGN KEY (`Departamentos_idDepartamentos`) REFERENCES `departamentos` (`idDepartamentos`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +47,7 @@ CREATE TABLE `profesores` (
 
 LOCK TABLES `profesores` WRITE;
 /*!40000 ALTER TABLE `profesores` DISABLE KEYS */;
-INSERT INTO `profesores` VALUES (1,'98745632W','2000-02-22','Paco','Pepe','PaPe2220','PaPe2220',789654123,'PaPe2220',1);
+INSERT INTO `profesores` VALUES (1,'98745632W','2000-02-22','Paco','Pepe','PaPe2220','PaPe2220',789654123,'PaPe2220',1),(2,'56321478W','1957-05-30','Juanito','Fernandez','JuFe3057','JuFe3057',756321965,'JuFe3057@gmail.com',2);
 /*!40000 ALTER TABLE `profesores` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 20:56:50
+-- Dump completed on 2024-05-05 17:32:36

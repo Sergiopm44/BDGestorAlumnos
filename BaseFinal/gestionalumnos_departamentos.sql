@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `gestionalumnos` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
+USE `gestionalumnos`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gestionalumnos
@@ -16,38 +18,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `alumno`
+-- Table structure for table `departamentos`
 --
 
-DROP TABLE IF EXISTS `alumno`;
+DROP TABLE IF EXISTS `departamentos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `alumno` (
-  `idAlumno` int(11) NOT NULL AUTO_INCREMENT,
-  `dniA` varchar(9) NOT NULL,
-  `fechNa` date NOT NULL,
+CREATE TABLE `departamentos` (
+  `idDepartamentos` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
-  `apellido` varchar(45) NOT NULL,
-  `usuario` varchar(45) NOT NULL,
-  `contrasenia` varchar(45) NOT NULL,
-  `telefono` int(11) DEFAULT NULL,
-  `email` varchar(120) DEFAULT NULL,
-  `Curso_idCurso` int(11) NOT NULL,
-  PRIMARY KEY (`idAlumno`,`Curso_idCurso`),
-  UNIQUE KEY `dniA_UNIQUE` (`dniA`),
-  KEY `fk_Alumno_Curso_idx` (`Curso_idCurso`),
-  CONSTRAINT `fk_Alumno_Curso` FOREIGN KEY (`Curso_idCurso`) REFERENCES `curso` (`idCurso`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `descripcion` varchar(150) NOT NULL,
+  `numDepartamento` int(11) NOT NULL,
+  PRIMARY KEY (`idDepartamentos`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `alumno`
+-- Dumping data for table `departamentos`
 --
 
-LOCK TABLES `alumno` WRITE;
-/*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
-INSERT INTO `alumno` VALUES (1,'65698744A','2000-05-13','Pablo','Lama','PaLa1320','Pala1320?',789632145,'Pala1320@gmail.com',1),(4,'65098734A','2000-05-13','Pablo','Lama','PaLa1320','Pala1320?',789632145,'Pala1320@gmail.com',1),(7,'78965412W','2000-02-04','Manuel','Vazquez','MaVa0420','MaVa0420',123654987,'MaVA0420@gmail.com',1),(8,'78995643W','2000-02-04','Migue','Pérez','MiPe0420','MiPe0420',789512357,'MiPe0420@gmail.com',1);
-/*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
+LOCK TABLES `departamentos` WRITE;
+/*!40000 ALTER TABLE `departamentos` DISABLE KEYS */;
+INSERT INTO `departamentos` VALUES (1,'Mates','Numeros',111),(2,'Programacion','Codigo',112),(3,'Sistemas Informaticos','Taller',113),(4,'Ingles','Idiomas',114);
+/*!40000 ALTER TABLE `departamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -59,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 20:56:49
+-- Dump completed on 2024-05-05 17:32:36

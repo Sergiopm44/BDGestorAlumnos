@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `gestionalumnos` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
+USE `gestionalumnos`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gestionalumnos
@@ -16,31 +18,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `curso_has_profesores`
+-- Table structure for table `centro`
 --
 
-DROP TABLE IF EXISTS `curso_has_profesores`;
+DROP TABLE IF EXISTS `centro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `curso_has_profesores` (
-  `Curso_idCurso` int(11) NOT NULL,
-  `Profesores_idProfesor` int(11) NOT NULL,
-  `Profesores_Departamentos_idDepartamentos` int(11) NOT NULL,
-  PRIMARY KEY (`Curso_idCurso`,`Profesores_idProfesor`,`Profesores_Departamentos_idDepartamentos`),
-  KEY `fk_Curso_has_Profesores1_Profesores1_idx` (`Profesores_idProfesor`,`Profesores_Departamentos_idDepartamentos`),
-  KEY `fk_Curso_has_Profesores1_Curso1_idx` (`Curso_idCurso`),
-  CONSTRAINT `fk_Curso_has_Profesores1_Curso1` FOREIGN KEY (`Curso_idCurso`) REFERENCES `curso` (`idCurso`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Curso_has_Profesores1_Profesores1` FOREIGN KEY (`Profesores_idProfesor`, `Profesores_Departamentos_idDepartamentos`) REFERENCES `profesores` (`idProfesor`, `Departamentos_idDepartamentos`) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE `centro` (
+  `idCentro` int(11) NOT NULL AUTO_INCREMENT,
+  `nif` int(11) NOT NULL,
+  `direccion` varchar(100) NOT NULL,
+  `localidad` varchar(45) NOT NULL,
+  `provincia` varchar(45) NOT NULL,
+  `cPostal` int(11) NOT NULL,
+  `Telefono` int(11) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  PRIMARY KEY (`idCentro`),
+  UNIQUE KEY `nif_UNIQUE` (`nif`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `curso_has_profesores`
+-- Dumping data for table `centro`
 --
 
-LOCK TABLES `curso_has_profesores` WRITE;
-/*!40000 ALTER TABLE `curso_has_profesores` DISABLE KEYS */;
-/*!40000 ALTER TABLE `curso_has_profesores` ENABLE KEYS */;
+LOCK TABLES `centro` WRITE;
+/*!40000 ALTER TABLE `centro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `centro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 20:56:50
+-- Dump completed on 2024-05-05 17:32:36
